@@ -27,7 +27,7 @@ class UploadLocalForm {
 			'tmp_name' => $name,
 			'error' => 0
 		);
-		$this->upload->initialize( $name, new WebRequestUploadLocal( true, $fileInfo ) );
+		$this->upload->initialize( $dest, new WebRequestUploadLocal( true, $fileInfo ) );
 	}
 		
 	function processUpload( $user ) {
