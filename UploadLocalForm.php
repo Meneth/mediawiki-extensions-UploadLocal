@@ -27,7 +27,13 @@ class UploadLocalForm {
 			'tmp_name' => $name,
 			'error' => 0
 		);
-		$this->upload->initialize( $dest, new WebRequestUploadLocal( true, $fileInfo ) );
+		if( !class_exists( 'WebRequestUpload' ) ) {
+			# Prior to 1.17, there was no WebRequestUpload class and the initialize function was a bit different
+			$this->upload->initialize( $dest, $name, filesize( $name ) );
+		} else {
+			# For 1.17+
+			$this->upload->initialize( $dest, new WebRequestUploadLocal( true, $fileInfo ) );
+		}
 	}
 		
 	function processUpload( $user ) {

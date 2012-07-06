@@ -1,5 +1,4 @@
 <?php
-
 class UploadLocal extends SpecialPage {
 	function __construct() {
 		parent::__construct( 'UploadLocal',  'uploadlocal' );

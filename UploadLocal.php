@@ -30,7 +30,9 @@ $wgExtensionCredits['specialpage'][] = array(
 $wgSpecialPages['UploadLocal'] = 'UploadLocal';
 $wgExtensionMessagesFiles['UploadLocal'] = dirname( __FILE__ ) . '/UploadLocal.i18n.php';
 $wgAutoloadClasses[ 'UploadLocal' ] = dirname( __FILE__ ) . '/UploadLocal_body.php';
-$wgAutoloadClasses[ 'WebRequestUploadLocal' ] = dirname( __FILE__ ) . '/WebRequestUploadLocal.php';
+if( class_exists( 'WebRequestUpload' ) ) {
+	$wgAutoloadClasses[ 'WebRequestUploadLocal' ] = dirname( __FILE__ ) . '/WebRequestUploadLocal.php';
+}
 
 $wgUploadLocalDirectory = $IP . '/extensions/UploadLocal/data';
 
