@@ -27,6 +27,7 @@ class UploadLocalForm {
 			'tmp_name' => $name,
 			'error' => 0
 		);
+		
 		if( !class_exists( 'WebRequestUpload' ) ) {
 			# Prior to 1.17, there was no WebRequestUpload class and the initialize function was a bit different
 			$this->upload->initialize( $dest, $name, filesize( $name ) );
@@ -40,11 +41,22 @@ class UploadLocalForm {
 		# Have to call this line to set the extension to avoid a VERIFICATION_ERROR
 		$title = $this->upload->getTitle();
 		
+		if( $title == null ) {
+			# We should check mTitleError or call validateName() here to get the specific problem with the file but since both are protected we can't. Protected === Bullshit.
+			$this->uploadError( wfMsg( 'uploadlocal_error_badtitle', $this->getFilename() ) );
+			return;
+		}
+		
 		# Check for warnings like the file already exists in the wiki
 		$warnings = $this->upload->checkWarnings();
-		if ( $warnings && isset( $warnings['exists'] ) && $warnings['exists']['warning'] != 'was-deleted' ) {
-			$this->uploadError( wfMsg( 'uploadlocal_error_exists', $warnings['exists']['file']->getName() ) );
-			return;
+		if ( $warnings && isset( $warnings['exists'] ) ) {
+			if( $warnings['exists']['warning'] == 'exists' || $warnings['exists']['warning'] == 'page-exists' ) {
+				$this->uploadError( wfMsg( 'uploadlocal_error_exists', $warnings['exists']['file']->getName() ) );
+				return;
+			} elseif( $warnings['exists']['warning'] == 'bad-prefix' ) {
+				$this->uploadError( wfMsg( 'uploadlocal_error_badprefix', $warnings['exists']['file']->getName() ) );
+				return;
+			}
 		}
 		
 		# Check for verifications that the upload succeded.

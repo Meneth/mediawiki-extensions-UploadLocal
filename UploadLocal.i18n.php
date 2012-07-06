@@ -34,7 +34,10 @@ This helps remove repetitive text such as categories and metadata.
 To '''append''' is to add to the end of text, while to '''prepend''' means to add to the beginning of text.
 Especially for descriptions, make sure you give a few linebreaks before/after the text.",
 
+	'uploadlocal_error_badtitle' => 'The file name $1 is invalid. The name might be too long or the file extension may be prohibited.',
+	'uploadlocal_error_empty' => 'The file you submitted was empty.',
 	'uploadlocal_error_exists' => 'The file $1 already exists.',
+	'uploadlocal_error_badprefix' => 'The file name $1 is prohibited by the wiki settings.',
 	'uploadlocal_error_empty' => 'The file you submitted was empty.',
 	'uploadlocal_error_missing' => 'The file is missing an extension.',
 	'uploadlocal_error_badtype' => 'This type of file is banned.',
