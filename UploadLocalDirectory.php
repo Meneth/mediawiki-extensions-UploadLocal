@@ -68,7 +68,7 @@ class UploadLocalDirectory {
 		$wgOut->addWikitext( wfMsg( 'uploadlocaltext' ) );
 		
 		$titleObj = Title::makeTitle( NS_SPECIAL, 'UploadLocal' );
-		$action = $titleObj->escapeLocalURL();
+		$action = htmlspecialchars( $titleObj->getLocalURL() );
 		
 		$wgOut->addHTML('<form id="uploadlocal" method="post"'.
 			' enctype="multipart/form-data" action="'.$action.'">');
