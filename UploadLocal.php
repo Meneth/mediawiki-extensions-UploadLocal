@@ -23,11 +23,9 @@ $wgExtensionCredits['specialpage'][] = array(
 	'path' => __FILE__,
 	'name' => 'UploadLocal',
 	'descriptionmsg' => 'uploadlocal-desc',
-	//'author' => array( '' ),
-	// 'version' => '',
-	// 'url' => 'https://www.mediawiki.org/wiki/Extension:UploadLocal'
 );
 $wgSpecialPages['UploadLocal'] = 'UploadLocal';
+$wgMessagesDirs['UploadLocal'] = __DIR__ . '/i18n';
 $wgExtensionMessagesFiles['UploadLocal'] = dirname( __FILE__ ) . '/UploadLocal.i18n.php';
 $wgAutoloadClasses[ 'UploadLocal' ] = dirname( __FILE__ ) . '/UploadLocal_body.php';
 if( class_exists( 'WebRequestUpload' ) ) {
