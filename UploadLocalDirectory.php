@@ -1,9 +1,9 @@
 <?php
 class UploadLocalDirectory {
 	
-	var $_directory;
-	var $_was_posted;
-	var $_available_files;
+	public $_directory;
+	public $_was_posted;
+	public $_available_files;
 	
 	function UploadLocalDirectory($request, $directory) {
 		$this->_directory = $directory;

@@ -1,8 +1,8 @@
 <?php
 class UploadLocalForm {
 	
-	var $_error = '';
-	var $_filename;
+	public $_error = '';
+	public $_filename;
 	
 	/**
 	 * With our parameters, simulate a request
