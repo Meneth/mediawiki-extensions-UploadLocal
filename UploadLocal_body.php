@@ -14,4 +14,8 @@ class UploadLocal extends SpecialPage {
 		$directory = new UploadLocalDirectory($wgRequest, $wgUploadLocalDirectory);
 		$directory->execute();
 	}
+
+	protected function getGroupName() {
+		return 'media';
+	}
 }

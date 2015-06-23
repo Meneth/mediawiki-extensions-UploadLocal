@@ -37,4 +37,3 @@ $wgUploadLocalDirectory = $IP . '/extensions/UploadLocal/data';
 $wgAvailableRights[] = 'uploadlocal';
 $wgGroupPermissions['uploader']['uploadlocal'] = true;
 $wgGroupPermissions['sysop']   ['uploadlocal'] = true;
-$wgSpecialPageGroups['UploadLocal'] = 'media';
