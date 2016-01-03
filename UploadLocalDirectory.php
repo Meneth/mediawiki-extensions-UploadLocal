@@ -20,7 +20,7 @@ class UploadLocalDirectory {
 		// this code.
 		
 		if( ! $wgEnableUploads ) {
-			$wgOut->addWikiText( wfMsg( 'uploaddisabled' ) );
+			$wgOut->addWikiText( wfMessage( 'uploaddisabled' )->text() );
 			return;
 		}
 		
@@ -37,18 +37,18 @@ class UploadLocalDirectory {
 		
 		// check if both relevant directories are writeable
 		if ( !is_writeable( $wgUploadDirectory ) ) {
-			$wgOut->addWikiText( wfMsg( 'upload_directory_read_only', $wgUploadDirectory ) );
+			$wgOut->addWikiText( wfMessage( 'upload_directory_read_only', $wgUploadDirectory )->text() );
 			return;
 		}
 		if ( !is_writeable($this->_directory) ) {
-			$wgOut->addWikiText( wfMsg( 'upload_directory_read_only', $this->_directory ) );
+			$wgOut->addWikiText( wfMessage( 'upload_directory_read_only', $this->_directory )->text() );
 			return;
 		}
 		
 		// check if there are any files to upload
 		if (empty($this->_available_files)) {
-			$wgOut->addWikitext( wfMsg( 'uploadlocaltext' ) );
-			$wgOut->addWikitext( wfMsg( 'nolocalfiles', htmlentities($this->_directory) ) );
+			$wgOut->addWikitext( wfMessage( 'uploadlocaltext' )->text() );
+			$wgOut->addWikitext( wfMessage( 'nolocalfiles', $this->_directory )->escaped() );
 			return;
 		}
 		
@@ -63,9 +63,9 @@ class UploadLocalDirectory {
 	function showForm() {
 		global $wgOut;
 		
-		$wgOut->setPageTitle( wfMsg('specialuploadlocal') );
+		$wgOut->setPageTitle( wfMessage('specialuploadlocal') );
 		
-		$wgOut->addWikitext( wfMsg( 'uploadlocaltext' ) );
+		$wgOut->addWikitext( wfMessage( 'uploadlocaltext' )->text() );
 		
 		$titleObj = Title::makeTitle( NS_SPECIAL, 'UploadLocal' );
 		$action = htmlspecialchars( $titleObj->getLocalURL() );
@@ -73,8 +73,8 @@ class UploadLocalDirectory {
 		$wgOut->addHTML('<form id="uploadlocal" method="post"'.
 			' enctype="multipart/form-data" action="'.$action.'">');
 		
-		$wgOut->addWikitext('==' . wfMsg('uploadlocal_file_list') . '==');
-		$wgOut->addWikitext(wfMsg('uploadlocal_file_list_explanation'));
+		$wgOut->addWikitext('==' . wfMessage('uploadlocal_file_list')->text() . '==');
+		$wgOut->addWikitext(wfMessage('uploadlocal_file_list_explanation')->text());
 		
 		$html = '';
 		
@@ -82,9 +82,9 @@ class UploadLocalDirectory {
 		$html .= '<theader>'.
 			'<tr><th style="width:1em;">X</th>'.
 			'<th style="width:1em;">W</th>'.
-			'<th style="width:10em;text-align:left;">'.wfMsg('sourcefilename').'</th>'.
-			'<th style="width:10em;text-align:left;">'.wfMsg('destfilename').'</th>'.
-			'<th style="text-align:left;">'.wfMsg('filedesc').'</th></tr></theader>';
+			'<th style="width:10em;text-align:left;">'.wfMessage('sourcefilename')->escaped().'</th>'.
+			'<th style="width:10em;text-align:left;">'.wfMessage('destfilename')->escaped().'</th>'.
+			'<th style="text-align:left;">'.wfMessage('filedesc')->escaped().'</th></tr></theader>';
 		$html .= '<tbody>';
 		$i = 1;
 		foreach ($this->_available_files as $file) {
@@ -108,28 +108,28 @@ class UploadLocalDirectory {
 		$html .= '</tbody></table>';
 		
 		$wgOut->addHTML($html);
-		$wgOut->addWikitext('==' . wfMsg('uploadlocal_global_params') . '==');
-		$wgOut->addWikitext(wfMsg('uploadlocal_global_params_explanation'));
+		$wgOut->addWikitext('==' . wfMessage('uploadlocal_global_params')->text() . '==');
+		$wgOut->addWikitext(wfMessage('uploadlocal_global_params_explanation')->text());
 		$html = '';
 		
 		$html .= '<table border="0" style="width:100%;">';
 		$html .= '<tbody>'.
-			'<tr><th style="text-align:right;width:25%;">'.wfMsg('uploadlocal_descriptions_prepend').'</th>'.
+			'<tr><th style="text-align:right;width:25%;">'.wfMessage('uploadlocal_descriptions_prepend')->escaped().'</th>'.
 			'<td><textarea cols="70" rows="3" style="width:100%;" name="wpUploadDescriptionsPrepend"></textarea></td></tr>'.
 			
-			'<tr><th style="text-align:right;">'.wfMsg('uploadlocal_descriptions_append').'</th>'.
+			'<tr><th style="text-align:right;">'.wfMessage('uploadlocal_descriptions_append')->escaped().'</th>'.
 			'<td><textarea cols="70" rows="3" style="width:100%;" name="wpUploadDescriptionsAppend"></textarea></td></tr>'.
 			
-			'<tr><th style="text-align:right;">'.wfMsg('uploadlocal_dest_file_prepend').'</th>'.
+			'<tr><th style="text-align:right;">'.wfMessage('uploadlocal_dest_file_prepend')->escaped().'</th>'.
 			'<td><input type="text" style="width:100%;" name="wpDestFilesPrepend" /></td></tr>'.
 			
-			'<tr><th style="text-align:right;">'.wfMsg('uploadlocal_dest_file_append').'</th>'.
+			'<tr><th style="text-align:right;">'.wfMessage('uploadlocal_dest_file_append')->escaped().'</th>'.
 			'<td><input type="text" style="width:100%;" name="wpDestFilesAppend" /></td></tr>'.
 			
 			'</tbody>';
 		$html .= '</table>';
 		
-		$html .= '<input type="submit" name="wpUploadLocal" value="'.wfMsg('uploadlocalbtn').'" /></form>';
+		$html .= '<input type="submit" name="wpUploadLocal" value="'.wfMessage('uploadlocalbtn')->escaped().'" /></form>';
 		
 		$wgOut->addHTML($html);
 	}
@@ -198,7 +198,7 @@ class UploadLocalDirectory {
 		}
 		
 		if (empty($forms)) {
-			$wgOut->addWikitext( wfMsg( 'uploadednolocalfiles' ) );
+			$wgOut->addWikitext( wfMessage( 'uploadednolocalfiles' )->text() );
 			return;
 		}
 		$no_error = true;
@@ -215,10 +215,10 @@ class UploadLocalDirectory {
 		$wgOut->redirect('');
 		
 		if (empty($errors)) {
-			$wgOut->setPageTitle(wfMsg('allfilessuccessful'));
-			$wgOut->addWikitext(wfMsg('allfilessuccessfultext'));
+			$wgOut->setPageTitle(wfMessage('allfilessuccessful'));
+			$wgOut->addWikitext(wfMessage('allfilessuccessfultext')->text());
 		} else {
-			$wgOut->setPageTitle(wfMsg('uploadlocalerrors'));
+			$wgOut->setPageTitle(wfMessage('uploadlocalerrors'));
 			$wgOut->addHTML('<ul>');
 			foreach ($errors as $name => $error) {
 				$wgOut->addHTML('<li>'.$name.' - '.$error.'</li>');

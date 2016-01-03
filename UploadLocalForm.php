@@ -43,7 +43,7 @@ class UploadLocalForm {
 		
 		if( $title == null ) {
 			# We should check mTitleError or call validateName() here to get the specific problem with the file but since both are protected we can't. Protected === Bullshit.
-			$this->uploadError( wfMsg( 'uploadlocal_error_badtitle', $this->getFilename() ) );
+			$this->uploadError( wfMessage( 'uploadlocal_error_badtitle', $this->getFilename() )->escaped() );
 			return;
 		}
 		
@@ -51,10 +51,10 @@ class UploadLocalForm {
 		$warnings = $this->upload->checkWarnings();
 		if ( $warnings && isset( $warnings['exists'] ) ) {
 			if( $warnings['exists']['warning'] == 'exists' || $warnings['exists']['warning'] == 'page-exists' ) {
-				$this->uploadError( wfMsg( 'uploadlocal_error_exists', $warnings['exists']['file']->getName() ) );
+				$this->uploadError( wfMessage( 'uploadlocal_error_exists', $warnings['exists']['file']->getName() )->escaped() );
 				return;
 			} elseif( $warnings['exists']['warning'] == 'bad-prefix' ) {
-				$this->uploadError( wfMsg( 'uploadlocal_error_badprefix', $warnings['exists']['file']->getName() ) );
+				$this->uploadError( wfMessage( 'uploadlocal_error_badprefix', $warnings['exists']['file']->getName() )->escaped() );
 				return;
 			}
 		}
@@ -69,32 +69,32 @@ class UploadLocalForm {
 		} else {
 			switch( $verification['status'] ) {
 				case UploadBase::EMPTY_FILE:
-					$this->uploadError( wfMsg( 'uploadlocal_error_empty' ) );
+					$this->uploadError( wfMessage( 'uploadlocal_error_empty' )->escaped() );
 					break;
 				case UploadBase::FILETYPE_MISSING:
-					$this->uploadError( wfMsg( 'uploadlocal_error_missing' ) );
+					$this->uploadError( wfMessage( 'uploadlocal_error_missing' )->escaped() );
 					break;
 				case UploadBase::FILETYPE_BADTYPE:
 					global $wgFileExtensions;
-					$this->uploadError( wfMsg( 'uploadlocal_error_badtype' ) );
+					$this->uploadError( wfMessage( 'uploadlocal_error_badtype' )->escaped() );
 					break;
 				case UploadBase::MIN_LENGTH_PARTNAME:
-					$this->uploadError( wfMsg( 'uploadlocal_error_tooshort' ) );
+					$this->uploadError( wfMessage( 'uploadlocal_error_tooshort' )->escaped() );
 					break;
 				case UploadBase::ILLEGAL_FILENAME:
-					$this->uploadError( wfMsg( 'uploadlocal_error_illegal' ) );
+					$this->uploadError( wfMessage( 'uploadlocal_error_illegal' )->escaped() );
 					break;
 				case UploadBase::OVERWRITE_EXISTING_FILE:
-					$this->uploadError( wfMsg( 'uploadlocal_error_overwrite' ) );
+					$this->uploadError( wfMessage( 'uploadlocal_error_overwrite' )->escaped() );
 					break;
 				case UploadBase::VERIFICATION_ERROR:
-					$this->uploadError( wfMsg( 'uploadlocal_error_verify', $verification['details'][0] ) );
+					$this->uploadError( wfMessage( 'uploadlocal_error_verify', $verification['details'][0] )->escaped() );
 					break;
 				case UploadBase::HOOK_ABORTED:
-					$this->uploadError( wfMsg( 'uploadlocal_error_hook' ) );
+					$this->uploadError( wfMessage( 'uploadlocal_error_hook' )->escaped() );
 					break;
 				default:
-					$this->uploadError( wfMsg( 'uploadlocal_error_unknown' ) );
+					$this->uploadError( wfMessage( 'uploadlocal_error_unknown' )->escaped() );
 					break;
 			}
 		}
