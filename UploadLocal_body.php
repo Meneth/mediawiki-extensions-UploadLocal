@@ -4,6 +4,10 @@ class UploadLocal extends SpecialPage {
 		parent::__construct( 'UploadLocal',  'uploadlocal' );
 	}
 
+	public function doesWrites() {
+		return true;
+	}
+
 	function execute( $par ) {
 		global $wgRequest, $wgUploadLocalDirectory;
 		
