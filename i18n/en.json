@@ -8,7 +8,7 @@
 	"uploadlocal_directory_readonly": "The local upload directory ($1) is not writeable by the webserver.",
 	"uploadlocaltext": "Use this form to mass upload files already on the server in the upload local directory.\nYou can find out more general information at [[Special:Upload|the regular upload file page]].",
 	"uploadlocalbtn": "Upload local files",
-	"nolocalfiles": "There are no files in the local upload folder. Try placing some files in \"<code>$1</code>.\"",
+	"nolocalfiles": "There are no files in the local upload folder. Try placing some files in <code>$1</code>.",
 	"uploadednolocalfiles": "You did not upload any files.",
 	"allfilessuccessful": "All files uploaded successfully",
 	"uploadlocalerrors": "Some files had errors",
