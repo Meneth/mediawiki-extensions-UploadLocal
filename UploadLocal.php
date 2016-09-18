@@ -23,6 +23,8 @@ $wgExtensionCredits['specialpage'][] = array(
 	'path' => __FILE__,
 	'name' => 'UploadLocal',
 	'descriptionmsg' => 'uploadlocal-desc',
+	'url' => 'https://www.mediawiki.org/wiki/Extension:UploadLocal',
+	'version' => '1.1',
 );
 $wgSpecialPages['UploadLocal'] = 'UploadLocal';
 $wgMessagesDirs['UploadLocal'] = __DIR__ . '/i18n';
