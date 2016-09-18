@@ -14,6 +14,8 @@ class UploadLocalDirectory {
 	function execute() {
 		global $wgOut, $wgRequest, $wgUser, $wgEnableUploads,
 		  $wgUploadDirectory;
+		  
+		$wgOut->setPageTitle( wfMessage('specialuploadlocal') );
 		
 		// a bit of this is stolen from the SpecialUpload code, duplication
 		// is bad but there was no way to meaningfully integrate it into
@@ -62,9 +64,6 @@ class UploadLocalDirectory {
 	
 	function showForm() {
 		global $wgOut;
-		
-		$wgOut->setPageTitle( wfMessage('specialuploadlocal') );
-		
 		$wgOut->addWikitext( wfMessage( 'uploadlocaltext' )->text() );
 		
 		$titleObj = Title::makeTitle( NS_SPECIAL, 'UploadLocal' );
